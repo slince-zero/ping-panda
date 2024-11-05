@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
-import { client } from "../lib/client"
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import { client } from '@/lib/client'
 
 export const RecentPost = () => {
-  const [name, setName] = useState<string>("")
+  const [name, setName] = useState<string>('')
   const queryClient = useQueryClient()
 
   const { data: recentPost, isPending: isLoadingPosts } = useQuery({
-    queryKey: ["get-recent-post"],
+    queryKey: ['get-recent-post'],
     queryFn: async () => {
       const res = await client.post.recent.$get()
       return await res.json()
@@ -21,8 +21,8 @@ export const RecentPost = () => {
       await client.post.create.$post({ name })
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["get-recent-post"] })
-      setName("")
+      await queryClient.invalidateQueries({ queryKey: ['get-recent-post'] })
+      setName('')
     },
   })
 
