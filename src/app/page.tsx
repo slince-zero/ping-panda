@@ -1,42 +1,30 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query"
-import { RecentPost } from "./components/post"
-import { client } from "./lib/client"
+import { Heading } from './components/heading'
+import { MaxWidthWrappar } from './components/max-width-wrapper'
 
-export default async function Home() {
-  const res = await client.post.recent.$get()
-  const recentPost = await res.json()
-
-  /**
-   * This is the intended way to prefetch data on the server to have it immediately available in the client.
-   * But: you could also just pass the post as a prop instead of using the `HydrationBoundary`
-   */
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery({
-    queryFn: () => recentPost,
-    queryKey: ["get-recent-post"],
-  })
-
+const Page = () => {
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-medium font-heading tracking-tight sm:text-[5rem]">
-            <span className="text-brand-700">j</span>stack
-          </h1>
-
-          <p className="text-center max-w-prose text-balance">
-            The modern way to confidently ship high-performance, low-cost
-            Next.js apps. End-to-end typesafe with an incredible DX.
-          </p>
-
-          <RecentPost />
-        </div>
-      </main>
-    </HydrationBoundary>
+    <>
+      <section className="relative py-24 sm:py-32 bg-brand-25">
+        <MaxWidthWrappar className="text-center">
+          <div className="relative mx-auto text-center items-center flex flex-col gap-10">
+            <div>
+              <Heading>
+                <span>Real-Time Sass Insight,</span>
+                <br />
+                <span className="relative bg-gradient-to-r from-brand-700 to-brand-800 bg-clip-text text-transparent">
+                  Delivered to Your Discord
+                </span>
+              </Heading>
+            </div>
+          </div>
+        </MaxWidthWrappar>
+      </section>
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+    </>
   )
 }
+
+export default Page
