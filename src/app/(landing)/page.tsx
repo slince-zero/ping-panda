@@ -1,10 +1,10 @@
+import { DiscordMessage } from '@/components/discord-message'
 import { Heading } from '@/components/heading'
 import { MaxWidthWrappar } from '@/components/max-width-wrapper'
-import { Check } from 'lucide-react'
-import { ShinyButton } from '@/components/shiny-button'
 import { MockDiscordUI } from '@/components/mock-discord-ui'
-import { AnimatedList, AnimatedListItem } from '@/components/ui/animated-list'
-import { DiscordMessage } from '@/components/discord-message'
+import { ShinyButton } from '@/components/shiny-button'
+import { AnimatedList } from '@/components/ui/animated-list'
+import { Check } from 'lucide-react'
 
 const Page = () => {
   return (
@@ -87,7 +87,7 @@ const Page = () => {
                     avatarSrc="/brand-asset-profile-picture.png"
                     avatarAlt="PingPanda Avatar"
                     username="PingPanda"
-                    timestamp="Today at 12:35PM"
+                    timestamp="Today at 7:35AM"
                     badgeText="Revenue"
                     badgeColor="#faa61a"
                     title="💰 Payment received"
