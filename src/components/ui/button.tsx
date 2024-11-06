@@ -4,13 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/utils"
 
+/**
+ * @description 利用 cva 创建的动态样式生成器，基于 variant 和 size 来生成不同的按钮样式
+ */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-brand-700 text-brand-50 shadow hover:bg-brand-800",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
