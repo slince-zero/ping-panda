@@ -1,6 +1,10 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// User 与 EventCategory、Event 和 Quota 存在一对多和一对一的关系
+// EventCategory 与 Event 之间是一对多的关系
+// Event 必须关联一个 User，但可以选择性地关联一个 EventCategory
+// Quota 是 User 的配额记录，每个 User 只能有一个 Quota
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
@@ -11,11 +15,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  name      String
+enum Plan {
+  FREE
+  PRO
+}
+
+model User {
+  id         String  @id @default(cuid()) // 主键，唯一标识符
+  externalId String? @unique // 外部系统的用户 ID
+
+  quotaLimit Int // 用户的配额限制
+  plan       Plan @default(FREE)
+
+  email     String   @unique
+  apiKey    String   @unique @default(cuid())
+  discordId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([name])
+  EventCategories EventCategory[]
+  Event           Event[]
+  Quota           Quota?
+
+  @@index([email, apiKey]) // 创建一个索引来加速基于 email 的查询操作
+}
+
+model EventCategory {
+  id    String  @id @default(cuid())
+  name  String
+  color Int
+  emoji String?
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Event     Event[]
+
+  @@unique([name, userId]) // 确保同一用户不能创建相同名称的分类
+}
+
+// 事件交付状态
+enum DeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+}
+
+model Event {
+  id               String @id @default(cuid())
+  formattedMessage String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  name   String
+  fields Json
+
+  deliveryStatus DeliveryStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  EventCategory   EventCategory? @relation(fields: [eventCategoryId], references: [id])
+  eventCategoryId String?
+
+  @@index([createdAt])
+}
+
+// 配额
+model Quota {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  year  Int
+  month Int
+  count Int @default(0)
+
+  updatedAt DateTime @updatedAt
 }
