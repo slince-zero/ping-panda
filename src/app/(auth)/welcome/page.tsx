@@ -1,8 +1,31 @@
+'use client'
 import { Heading } from '@/components/heading'
 import { LoadingSpinner } from '@/components/loading-spinner'
+import { client } from '@/lib/client'
+import { useQuery } from '@tanstack/react-query' // 用于处理数据获取、缓存和状态管理的工具
 import { LucideProps } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const Page = () => {
+  const router = useRouter()
+
+  const { data } = useQuery({
+    queryFn: async () => {
+      const res = await client.auth.getDatabaseSyncStatus.$get()
+      return await res.json()
+    },
+    // 用于标识查询的唯一性，类似于数据的 ID
+    queryKey: ['get-database-sync-status'],
+    // 设置时间轮询，每秒一次
+    refetchInterval: (query) => {
+      return query.state.data?.isSynced ? false : 1000
+    },
+  })
+
+  useEffect(() => {
+    if (data?.isSynced) router.push('/dashboard')
+  }, [data, router])
   return (
     <div className="flex w-full h-screen flex-1 items-center justify-center px-4">
       <BackgroundPattern className="absolute inset-0 left-1/2 z-0 -translate-x-1/2 opacity-75" />
