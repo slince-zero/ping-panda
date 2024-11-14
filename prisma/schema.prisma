@@ -21,7 +21,7 @@ enum Plan {
 }
 
 model User {
-  id         String  @id @default(cuid()) // 主键，唯一标识符
+  id         String  @id @default(cuid()) // 主键，唯一标识符，cuid() 会自动生成一个唯一且相对短的字符串标识符
   externalId String? @unique // 外部系统的用户 ID
 
   quotaLimit Int // 用户的配额限制
