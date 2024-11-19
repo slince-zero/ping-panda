@@ -34,8 +34,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   EventCategories EventCategory[]
-  Event           Event[]
-  Quota           Quota?
+  events           Event[]
+  Quota           Quota[]
 
   @@index([email, apiKey]) // 创建一个索引来加速基于 email 的查询操作
 }
@@ -46,12 +46,12 @@ model EventCategory {
   color Int
   emoji String?
 
-  User   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
   userId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Event     Event[]
+  events     Event[]
 
   @@unique([name, userId]) // 确保同一用户不能创建相同名称的分类
 }
