@@ -45,7 +45,8 @@ export const DashboardPageContent = () => {
       onSuccess: () => {
         // 重新获取数据
         queryClient.invalidateQueries({ queryKey: ['user-event-categories'] })
-        setDeletingCategory(null)
+        // 防止置空之后，dialog 还没关闭，依然显示内容
+        // setDeletingCategory(null)
       },
     }
   )
