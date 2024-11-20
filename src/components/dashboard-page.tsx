@@ -22,7 +22,7 @@ export const DashboardPage = ({
           <div className="flex flex-col sm:flex-row sm:items-center gap-y-2 gap-x-8">
             {hiddenBackButton ? null : (
               <Button className="w-fit" variant="outline">
-                <ArrowLeft size="size-4" />
+                <ArrowLeft className="size-4" />
               </Button>
             )}
 
