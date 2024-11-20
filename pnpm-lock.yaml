@@ -8,6 +8,9 @@ dependencies:
   '@clerk/nextjs':
     specifier: ^6.2.0
     version: 6.2.0(next@14.2.16)(react-dom@18.3.1)(react@18.3.1)
+  '@hookform/resolvers':
+    specifier: ^3.9.1
+    version: 3.9.1(react-hook-form@7.53.2)
   '@neondatabase/serverless':
     specifier: ^0.9.4
     version: 0.9.5
@@ -62,6 +65,9 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.3.1(react@18.3.1)
+  react-hook-form:
+    specifier: ^7.53.2
+    version: 7.53.2(react@18.3.1)
   react-syntax-highlighter:
     specifier: ^15.6.1
     version: 15.6.1(react@18.3.1)
@@ -530,6 +536,14 @@ packages:
   /@fastify/busboy@2.1.1:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
+    dev: false
+
+  /@hookform/resolvers@3.9.1(react-hook-form@7.53.2):
+    resolution: {integrity: sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.53.2(react@18.3.1)
     dev: false
 
   /@humanwhocodes/config-array@0.13.0:
@@ -3463,6 +3477,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+    dev: false
+
+  /react-hook-form@7.53.2(react@18.3.1):
+    resolution: {integrity: sha512-YVel6fW5sOeedd1524pltpHX+jgU2u3DSDtXEaBORNdqiNrsX/nUI/iGXONegttg0mJVnfrIkiV0cmTU6Oo2xw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /react-is@16.13.1:
