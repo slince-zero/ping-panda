@@ -1,5 +1,6 @@
 'use client'
 import { LoadingSpinner } from '@/components/loading-spinner'
+import { Modal } from '@/components/modal'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Dialog,
@@ -129,51 +130,13 @@ export const DashboardPageContent = () => {
                 View all
                 <ArrowRight className="size-4" />
               </div>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-500 hover:text-red-600 transition-colors"
-                    aria-label={`Delete ${category.name} category`}
-                    onClick={() => setDeletingCategory(category.name)}
-                  >
-                    <Trash2 className="size-5" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Delete Category</DialogTitle>
-                    <br />
-                    <DialogDescription>
-                      Are you sure you want to delete the category &nbsp;
-                      {<span className="text-red-600">{deletingCategory}</span>}
-                      &nbsp;? This action
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button
-                        variant="outline"
-                        onClick={() => setDeletingCategory(null)}
-                      >
-                        Cancel
-                      </Button>
-                    </DialogClose>
-
-                    <Button
-                      variant="destructive"
-                      type="button"
-                      onClick={() =>
-                        deletingCategory && deleteCategory(deletingCategory)
-                      }
-                      disabled={isDeletingCategory}
-                    >
-                      {isDeletingCategory ? 'Deleting...' : 'Delete'}
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+              <Modal
+                name={category.name}
+                setDeletingCategory={setDeletingCategory}
+                deletingCategory={deletingCategory}
+                deleteCategory={deleteCategory}
+                isDeletingCategory={isDeletingCategory}
+              />
             </div>
           </div>
         </li>
