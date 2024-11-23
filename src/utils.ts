@@ -15,3 +15,15 @@ import { twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ *
+ * @param color
+ * @description 将颜色值转换为带 # 前缀的十六进制颜色值
+ * @returns
+ */
+export function parseColor(color: string) {
+  const hex = color.startsWith('#') ? color.slice(1) : color
+
+  return parseInt(hex, 16)
+}

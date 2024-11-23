@@ -25,7 +25,7 @@ const Page = async () => {
 
   return (
     <DashboardPage title="Dashboard">
-      <DashboardPageContent/>
+      <DashboardPageContent />
     </DashboardPage>
   )
 }
