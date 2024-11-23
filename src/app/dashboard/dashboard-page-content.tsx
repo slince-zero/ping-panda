@@ -65,7 +65,7 @@ export const DashboardPageContent = () => {
   }
 
   return (
-    <ul className="grid max-w-6xl pl-0 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+    <ul className="grid pl-0 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
       {categories.map((category) => (
         <li
           key={category.id}
